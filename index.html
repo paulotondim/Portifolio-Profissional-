@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paulo Tondim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Paulo Tondim</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Início</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#cep">CEP</a></li>
+    <li><a href="#cnpj">CNPJ</a></li>
+    <li><a href="#feriados">Feriados</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-avatar">👨‍💻</div>
+      <div class="hero-text">
+        <h1>Paulo <span>Tondim</span></h1>
+        <p>Estudante de Análise e Desenvolvimento de Sistemas na UNIFASIPE · Sinop, MT</p>
+        <div class="hero-socials">
+          <a href="https://github.com/paulotondim" target="_blank">🐙 GitHub</a>
+          <a href="https://linkedin.com/in/paulo-tondim" target="_blank">💼 LinkedIn</a>
+          <a href="https://instagram.com/paulo_aft_" target="_blank">📸 Instagram</a>
+          <a href="https://wa.me/5566996545702" target="_blank">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <h2>Sobre mim</h2>
+    <p>Olá! Sou Paulo Tondim, estudante de ADS no Centro Universitário UNIFASIPE em Sinop, Mato Grosso.</p>
+    <p>Tenho interesse em desenvolvimento web e estou aprendendo HTML, CSS e JavaScript. Esta página foi feita como parte da atividade N3 da disciplina de Frontend Design Engineering.</p>
+    <p>Gosto de aprender coisas novas e estou sempre tentando evoluir como desenvolvedor.</p>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="habilidades">
+  <div class="container">
+    <h2>Habilidades</h2>
+    <div class="skills">
+      <span class="skill">HTML5</span>
+      <span class="skill">CSS3</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">Git & GitHub</span>
+      <span class="skill">Vercel</span>
+      <span class="skill">APIs REST</span>
+      <span class="skill">Design Responsivo</span>
+    </div>
+  </div>
+</section>
+
+<!-- CEP -->
+<section id="cep">
+  <div class="container">
+    <h2>Consulta de CEP</h2>
+    <p>Digite um CEP para ver o endereço completo.</p>
+    <div class="input-row">
+      <input type="text" id="input-cep" class="api-input" placeholder="Ex: 78555000" maxlength="8" />
+      <button class="api-btn" onclick="buscarCEP()">Buscar</button>
+    </div>
+    <div id="result-cep" class="api-result">
+      <p class="api-placeholder">Digite um CEP para consultar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CNPJ -->
+<section id="cnpj">
+  <div class="container">
+    <h2>Consulta de CNPJ</h2>
+    <p>Digite um CNPJ para ver os dados da empresa.</p>
+    <div class="input-row">
+      <input type="text" id="input-cnpj" class="api-input" placeholder="Ex: 00000000000191" maxlength="18" />
+      <button class="api-btn" onclick="buscarCNPJ()">Buscar</button>
+    </div>
+    <div id="result-cnpj" class="api-result">
+      <p class="api-placeholder">Digite um CNPJ (somente números).</p>
+    </div>
+  </div>
+</section>
+
+<!-- FERIADOS -->
+<section id="feriados">
+  <div class="container">
+    <h2>Feriados Nacionais</h2>
+    <p>Digite um ano para ver os feriados nacionais.</p>
+    <div class="input-row">
+      <input type="text" id="input-feriados" class="api-input" placeholder="Ex: 2026" maxlength="4" />
+      <button class="api-btn" onclick="buscarFeriados()">Buscar</button>
+    </div>
+    <div id="result-feriados" class="api-result">
+      <p class="api-placeholder">Digite um ano para consultar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <h2>Contato</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Pode me chamar por qualquer um dos canais abaixo!</p>
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-val">pauluspauluskk@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div>
+            <div class="c-label">Localização</div>
+            <div class="c-val">Sinop, Mato Grosso</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🎓</span>
+          <div>
+            <div class="c-label">Instituição</div>
+            <div class="c-val">UNIFASIPE · ADS</div>
+          </div>
+        </div>
+      </div>
+      <div class="social-list">
+        <a href="https://github.com/paulotondim" target="_blank" class="social-item">
+          <span class="s-icon">🐙</span>
+          <div>
+            <div class="s-label">GitHub</div>
+            <div class="s-handle">github.com/paulotondim</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/paulo-tondim" target="_blank" class="social-item">
+          <span class="s-icon">💼</span>
+          <div>
+            <div class="s-label">LinkedIn</div>
+            <div class="s-handle">Paulo Tondim</div>
+          </div>
+        </a>
+        <a href="https://instagram.com/paulo_aft_" target="_blank" class="social-item">
+          <span class="s-icon">📸</span>
+          <div>
+            <div class="s-label">Instagram</div>
+            <div class="s-handle">@paulo_aft_</div>
+          </div>
+        </a>
+        <a href="https://wa.me/5566996545702" target="_blank" class="social-item">
+          <span class="s-icon">💬</span>
+          <div>
+            <div class="s-label">WhatsApp</div>
+            <div class="s-handle">(66) 9 9654-5702</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Feito por Paulo Tondim · Atividade N3 · Frontend Design Engineering · UNIFASIPE</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
