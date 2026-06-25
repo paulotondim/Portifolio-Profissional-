@@ -46,7 +46,7 @@ A página contém informações sobre mim, minhas habilidades, formas de contato
 
 O projeto foi publicado na plataforma Vercel.
 
-Link do projeto: https://paulotondim.vercel.app
+Link do projeto: 
 
 ## Autor
 
