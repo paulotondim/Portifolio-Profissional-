@@ -1,86 +1,62 @@
-function switchTab(tab) {
-  document.querySelectorAll('.api-tab').forEach((t, i) => {
-    t.classList.toggle('active', ['cep', 'cnpj', 'feriados'][i] === tab);
-  });
-  document.querySelectorAll('.api-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-' + tab).classList.add('active');
+function buscarCEP() {
+  var cep = document.getElementById("campoCep").value;
+  var resultado = document.getElementById("resultadoCep");
+
+  fetch("https://brasilapi.com.br/api/cep/v2/" + cep)
+    .then(function(resposta) {
+      return resposta.json();
+    })
+    .then(function(dados) {
+      resultado.innerHTML =
+        "<p>CEP: " + dados.cep + "</p>" +
+        "<p>Rua: " + dados.street + "</p>" +
+        "<p>Bairro: " + dados.neighborhood + "</p>" +
+        "<p>Cidade: " + dados.city + "</p>" +
+        "<p>Estado: " + dados.state + "</p>";
+    })
+    .catch(function(erro) {
+      resultado.innerHTML = "<p>CEP não encontrado.</p>";
+    });
 }
 
-function setLoading(el) {
-  el.innerHTML = '<p class="loading">Buscando...</p>';
+function buscarCNPJ() {
+  var cnpj = document.getElementById("campoCnpj").value;
+  var resultado = document.getElementById("resultadoCnpj");
+
+  fetch("https://brasilapi.com.br/api/cnpj/v1/" + cnpj)
+    .then(function(resposta) {
+      return resposta.json();
+    })
+    .then(function(dados) {
+      resultado.innerHTML =
+        "<p>Razão Social: " + dados.razao_social + "</p>" +
+        "<p>Nome Fantasia: " + dados.nome_fantasia + "</p>" +
+        "<p>Situação: " + dados.descricao_situacao_cadastral + "</p>" +
+        "<p>Cidade: " + dados.municipio + "</p>" +
+        "<p>Estado: " + dados.uf + "</p>";
+    })
+    .catch(function(erro) {
+      resultado.innerHTML = "<p>CNPJ não encontrado.</p>";
+    });
 }
 
-function setError(el, msg) {
-  el.innerHTML = `<p class="api-error">❌ ${msg}</p>`;
-}
+function buscarFeriados() {
+  var ano = document.getElementById("campoAno").value;
+  var resultado = document.getElementById("resultadoFeriados");
 
-function renderGrid(el, items) {
-  const html = items.map(([label, value]) =>
-    `<div>
-      <div class="result-label">${label}</div>
-      <div class="result-value">${value || '—'}</div>
-    </div>`
-  ).join('');
-  el.innerHTML = `<div class="result-grid">${html}</div>`;
+  fetch("https://brasilapi.com.br/api/feriados/v1/" + ano)
+    .then(function(resposta) {
+      return resposta.json();
+    })
+    .then(function(dados) {
+      var lista = "<ul>";
+      for (var i = 0; i < dados.length; i++) {
+        lista += "<li>" + dados[i].date + " - " + dados[i].name + "</li>";
+      }
+      lista += "</ul>";
+      resultado.innerHTML = lista;
+    })
+    .catch(function(erro) {
+      resultado.innerHTML = "<p>Ano não encontrado.</p>";
+    });
 }
-
-async function buscarCEP() {
-  const cep = document.getElementById('input-cep').value.replace(/\D/g, '');
-  const res = document.getElementById('result-cep');
-  if (cep.length !== 8) { setError(res, 'CEP deve ter 8 dígitos.'); return; }
-  setLoading(res);
-  try {
-    const r = await fetch(`https://brasilapi.com.br/api/cep/v2/${cep}`);
-    if (!r.ok) throw new Error('CEP não encontrado.');
-    const d = await r.json();
-    renderGrid(res, [
-      ['CEP', d.cep],
-      ['Logradouro', d.street],
-      ['Bairro', d.neighborhood],
-      ['Cidade', d.city],
-      ['Estado', d.state],
-    ]);
-  } catch (e) { setError(res, e.message); }
-}
-
-async function buscarCNPJ() {
-  const cnpj = document.getElementById('input-cnpj').value.replace(/\D/g, '');
-  const res = document.getElementById('result-cnpj');
-  if (cnpj.length !== 14) { setError(res, 'CNPJ deve ter 14 dígitos.'); return; }
-  setLoading(res);
-  try {
-    const r = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`);
-    if (!r.ok) throw new Error('CNPJ não encontrado.');
-    const d = await r.json();
-    renderGrid(res, [
-      ['Razão Social', d.razao_social],
-      ['Nome Fantasia', d.nome_fantasia],
-      ['Situação', d.descricao_situacao_cadastral],
-      ['Município', d.municipio],
-      ['UF', d.uf],
-    ]);
-  } catch (e) { setError(res, e.message); }
-}
-
-async function buscarFeriados() {
-  const ano = document.getElementById('input-feriados').value.trim();
-  const res = document.getElementById('result-feriados');
-  if (!ano || ano.length !== 4) { setError(res, 'Digite um ano válido.'); return; }
-  setLoading(res);
-  try {
-    const r = await fetch(`https://brasilapi.com.br/api/feriados/v1/${ano}`);
-    if (!r.ok) throw new Error('Ano não encontrado.');
-    const lista = await r.json();
-    const html = lista.map(f =>
-      `<div>
-        <div class="result-label">${f.date}</div>
-        <div class="result-value">${f.name}</div>
-      </div>`
-    ).join('');
-    res.innerHTML = `<div class="result-grid">${html}</div>`;
-  } catch (e) { setError(res, e.message); }
-}
-
-document.getElementById('input-cep').addEventListener('keydown', e => e.key === 'Enter' && buscarCEP());
-document.getElementById('input-cnpj').addEventListener('keydown', e => e.key === 'Enter' && buscarCNPJ());
-document.getElementById('input-feriados').addEventListener('keydown', e => e.key === 'Enter' && buscarFeriados());
